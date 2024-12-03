@@ -19,6 +19,25 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { signOut } from "../lib/auth";
 import { requireUser } from "../lib/hooks";
+import prisma from "../lib/db";
+import { redirect } from "next/navigation";
+
+async function getData(userId: string) {
+  const data = await prisma.user.findUnique({
+    where: {
+      id: userId,
+    },
+    select: {
+      userName: true,
+    },
+  });
+
+  if (!data?.userName) {
+    return redirect("/onboarding");
+  }
+
+  return data;
+}
 
 export default async function DashboardLayout({
   children,
@@ -26,6 +45,9 @@ export default async function DashboardLayout({
   children: ReactNode;
 }) {
   const session = await requireUser();
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const data = await getData(session.user?.id as string)
 
   return (
     <>
@@ -78,8 +100,8 @@ export default async function DashboardLayout({
                     size="icon"
                     className="rounded-full"
                   >
-                    <img
-                      src={session?.user?.image as string}
+                    <Image
+                      src={session.user?.image as string}
                       alt="Profile Image"
                       width={20}
                       height={20}

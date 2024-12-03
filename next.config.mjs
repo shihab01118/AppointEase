@@ -9,6 +9,11 @@ const nextConfig = {
         port: "",
         protocol: "https",
       },
+      {
+        hostname: "lh3.googleusercontent.com", // Add this line
+        port: "",
+        protocol: "https",
+      },
     ],
   },
 };
