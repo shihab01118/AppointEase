@@ -14,7 +14,7 @@ import { OnboardingAction } from "../actions";
 import { useFormState } from "react-dom";
 import { useForm } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod";
-import { OnboardingSchema } from "@/lib/zodSchemas";
+import { OnboardingSchema } from "@/app/lib/zodSchemas";
 import { SubmitButton } from "../components/SubmitButtons";
 
 export default function OnboardingRoute() {
