@@ -29,11 +29,16 @@ async function getData(userId: string) {
     },
     select: {
       userName: true,
+      grantId: true,
     },
   });
 
   if (!data?.userName) {
     return redirect("/onboarding");
+  }
+
+  if (!data?.grantId) {
+    return redirect("/onboarding/grant-id");
   }
 
   return data;
@@ -47,7 +52,7 @@ export default async function DashboardLayout({
   const session = await requireUser();
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const data = await getData(session.user?.id as string)
+  const data = await getData(session.user?.id as string);
 
   return (
     <>
