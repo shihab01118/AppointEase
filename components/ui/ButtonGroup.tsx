@@ -22,7 +22,7 @@ export function ButtonGroup({ className, children }: IButtonGroupProps) {
             {
               "rounded-l-none": !isFirstItem,
               "rounded-r-none": !isLastItem,
-              "border-l-0": !isFirstItem,
+              "border-l-0": !isFirstItem, 
             },
             child.props.className
           ),
