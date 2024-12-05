@@ -29,7 +29,7 @@ import { useFormState } from "react-dom";
 import { useForm } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod";
 import { EventTypeSchema } from "../lib/zodSchemas";
-import { CreateEventTypeAction } from "../actions";
+import { EditEventTypeAction } from "../actions";
 
 type VideoCallProvider = "Zoom Meeting" | "Google Meet" | "Microsoft Teams";
 
@@ -53,7 +53,7 @@ export function EditEventForm({
   const [activePlatform, setActivePlatform] = useState<VideoCallProvider>(
     callProvider as VideoCallProvider
   );
-  const [lastResult, action] = useFormState(CreateEventTypeAction, undefined);
+  const [lastResult, action] = useFormState(EditEventTypeAction, undefined);
   const [form, fields] = useForm({
     lastResult,
     onValidate({ formData }) {
@@ -75,6 +75,7 @@ export function EditEventForm({
           </CardDescription>
         </CardHeader>
         <form id={form.id} onSubmit={form.onSubmit} action={action} noValidate>
+          <input type="hidden" name="id" value={id} />
           <CardContent className="grid gap-y-5">
             <div className="grid gap-y-2">
               <Label>Title</Label>
