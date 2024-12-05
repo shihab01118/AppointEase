@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @next/next/no-img-element */
 import { RenderCalendar } from "@/app/components/bookingForm/RenderCalendar";
+import { TimeTable } from "@/app/components/bookingForm/TimeTable";
 import prisma from "@/app/lib/db";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
@@ -46,10 +47,22 @@ async function getData(eventUrl: string, userName: string) {
 
 export default async function BookingFormRoute({
   params,
+  searchParams,
 }: {
   params: { username: string; eventUrl: string };
+  searchParams: { date?: string };
 }) {
   const data = await getData(params.eventUrl, params.username);
+
+  const selectedDate = searchParams.date
+    ? new Date(searchParams.date)
+    : new Date();
+
+  const formattedDate = new Intl.DateTimeFormat("en-US", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+  }).format(selectedDate);
 
   return (
     <div className="min-h-screen w-screen flex justify-center items-center">
@@ -73,7 +86,7 @@ export default async function BookingFormRoute({
               <p className="flex items-center">
                 <CalendarX2 className="size-4 mr-2 text-primary" />
                 <span className="text-sm font-medium text-muted-foreground">
-                  23 Sept 2023
+                  {formattedDate}
                 </span>
               </p>
               <p className="flex items-center">
@@ -97,7 +110,7 @@ export default async function BookingFormRoute({
 
           <Separator orientation="vertical" className="h-full w-[1px]" />
 
-          <div></div>
+          <TimeTable selectedDate={selectedDate} userName={params.username} />
         </CardContent>
       </Card>
     </div>
