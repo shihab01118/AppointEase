@@ -1,3 +1,4 @@
+import { cancelMeetingAction } from "@/app/actions";
 import { EmptyState } from "@/app/components/EmptyState";
 import { SubmitButton } from "@/app/components/SubmitButtons";
 import prisma from "@/app/lib/db";
@@ -66,7 +67,8 @@ export default async function MeetingRoute() {
           </CardHeader>
           <CardContent>
             {data.data.map((item) => (
-              <form key={item.id}>
+              <form key={item.id} action={cancelMeetingAction}>
+                <input type="hidden" name="eventId" value={item.id} />
                 <div className="grid grid-cols-3 justify-between items-center">
                   <div>
                     <p className="text-muted-foreground text-sm">
