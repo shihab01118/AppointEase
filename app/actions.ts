@@ -1,6 +1,7 @@
 "use server";
 
 import {
+  EventTypeSchema,
   onboardingSchemaValidation,
   SettingsSchema,
 } from "@/app/lib/zodSchemas";
@@ -146,8 +147,33 @@ export async function updateAvailabilityAction(formData: FormData) {
       )
     );
 
-    revalidatePath("/dashboard/availability")
+    revalidatePath("/dashboard/availability");
   } catch (error) {
     console.log("Error updating availability: ", error);
   }
+}
+
+export async function CreateEventTypeAction(prevState: unknown, formData: FormData) {
+  const session = await requireUser();
+
+  const submission = parseWithZod(formData, {
+    schema: EventTypeSchema,
+  });
+
+  if (submission.status !== "success") {
+    return submission.reply();
+  }
+
+  await prisma.eventType.create({
+    data: {
+      title: submission.value.title,
+      duration: submission.value.duration,
+      url: submission.value.url,
+      description: submission.value.description,
+      videoCallSoftware: submission.value.videoCallSoftware,
+      userId: session.user?.id,
+    },
+  });
+
+  return redirect("/dashboard");
 }
