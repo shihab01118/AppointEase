@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @next/next/no-img-element */
 import { createMeetingAction } from "@/app/actions";
 import { RenderCalendar } from "@/app/components/bookingForm/RenderCalendar";

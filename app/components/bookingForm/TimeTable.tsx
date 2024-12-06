@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import prisma from "@/app/lib/db";
 import { nylas } from "@/app/lib/nylas";
 import { Button } from "@/components/ui/button";
@@ -84,6 +83,7 @@ function calculateAvailableTimeSlot(
     new Date()
   );
 
+  //@ts-ignore
   const busySlots = nylasData.data[0].timeSlots.map((slot) => ({
     start: fromUnixTime(slot.startTime),
     end: fromUnixTime(slot.endTime),
@@ -113,7 +113,11 @@ function calculateAvailableTimeSlot(
   return freeSlots.map((slot) => format(slot, "HH:mm"));
 }
 
-export async function TimeTable({ selectedDate, userName, duration }: ITimeTableProps) {
+export async function TimeTable({
+  selectedDate,
+  userName,
+  duration,
+}: ITimeTableProps) {
   const { data, nylasCalendarData } = await getData(userName, selectedDate);
 
   const formattedDate = format(selectedDate, "yyyy-MM-dd");
