@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { AuthModal } from "./AuthModal";
-import HeroImage from "@/public/better.png";
+import HeroImage from "@/public/hero.png";
 
 export function Hero() {
   return (
@@ -10,8 +10,7 @@ export function Hero() {
           Introducing AppointEase 1.0
         </span>
         <h1 className="mt-8 text-4xl sm:text-6xl md:text-7xl lg:text-8xl leading-none font-medium">
-          Scheduling made{" "}
-          <span className="block text-primary -mt-2">super easy</span>
+          Scheduling made <span className="block text-primary">super easy</span>
         </h1>
         <p className="max-w-xl mx-auto mt-6 lg:text-lg text-muted-foreground">
           Scheduling a meeting can be a pain. But we at AppointEase make it easy

@@ -1,29 +1,29 @@
-import { CloudRain } from "lucide-react";
+import { UserPlus, Zap, Lock, Smile } from "lucide-react";
 
 const features = [
   {
     name: "Sign up for free",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores, cum nisi iure nesciunt voluptates quasi similique magni neque quis.",
-    icon: CloudRain,
+      "Start using AppointEase without any cost. Sign up quickly and begin streamlining your appointment scheduling with ease today.",
+    icon: UserPlus,
   },
   {
     name: "Blazing fast",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores, cum nisi iure nesciunt voluptates quasi similique magni neque quis.",
-    icon: CloudRain,
+      "Enjoy ultra-fast scheduling. AppointEase is optimized for speed, making managing and organizing your appointments a true breeze.",
+    icon: Zap,
   },
   {
-    name: "Super secure with nylas",
+    name: "Super secure with Nylas",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores, cum nisi iure nesciunt voluptates quasi similique magni neque quis.",
-    icon: CloudRain,
+      "Security you can trust. AppointEase integrates with Nylas to protect your data and ensure reliable, safe scheduling every time.",
+    icon: Lock,
   },
   {
     name: "Easy to use",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores, cum nisi iure nesciunt voluptates quasi similique magni neque quis.",
-    icon: CloudRain,
+      "Designed for simplicity. AppointEase offers an intuitive interface, making scheduling accessible and effortless for everyone involved.",
+    icon: Smile,
   },
 ];
 
@@ -36,9 +36,9 @@ export function Features() {
           Schedule meetings in minutes!
         </h1>
         <p className="mt-6 text-base leading-snug text-muted-foreground">
-          With AppointEase you can schedule meetings in minutes. We make it easy
-          for you to schedule meetings in minutes. The meetings are very fast
-          and easy to schedule.
+          With AppointEase, scheduling meetings is fast and easy. Book
+          appointments in minutes, streamlining your process and saving you
+          valuable time.
         </p>
       </div>
 
