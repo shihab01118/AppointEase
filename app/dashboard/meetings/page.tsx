@@ -45,8 +45,6 @@ export default async function MeetingRoute() {
 
   const data = await getData(session.user?.id as string);
 
-  console.log(data.data[0].conferencing);
-
   return (
     <>
       {data.data.length < 1 ? (
