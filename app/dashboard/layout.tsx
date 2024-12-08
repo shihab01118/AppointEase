@@ -52,7 +52,7 @@ export default async function DashboardLayout({
 }) {
   const session = await requireUser();
 
-  const data = await getData(session.user?.id as string);
+  await getData(session.user?.id as string);
 
   return (
     <>
@@ -78,22 +78,36 @@ export default async function DashboardLayout({
 
         <div className="flex flex-col">
           <header className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6 bg-muted/40">
-            <Sheet>
-              <SheetTrigger asChild>
-                <Button
-                  className="md:hidden shrink-0"
-                  size="icon"
-                  variant="outline"
-                >
-                  <Menu className="size-5" />
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="left" className="flex flex-col">
-                <nav className="grid gap-2 mt-10">
-                  <DashboardLinks />
-                </nav>
-              </SheetContent>
-            </Sheet>
+            <div className="flex items-center gap-2.5">
+              <Sheet>
+                <SheetTrigger asChild>
+                  <Button
+                    className="md:hidden shrink-0"
+                    size="icon"
+                    variant="outline"
+                  >
+                    <Menu className="size-5" />
+                  </Button>
+                </SheetTrigger>
+                <SheetContent side="left" className="flex flex-col">
+                  <Link href="/" className="flex items-center gap-2">
+                    <Image src={Logo} alt="Logo" className="size-8" />
+                    <p className="text-xl font-bold">
+                      Appoint<span className="text-primary">Ease</span>
+                    </p>
+                  </Link>
+                  <nav className="grid gap-2 mt-4">
+                    <DashboardLinks />
+                  </nav>
+                </SheetContent>
+              </Sheet>
+
+              <Link href="/" className="text-xl font-bold">
+                <p>
+                  Appoint<span className="text-primary">Ease</span>
+                </p>
+              </Link>
+            </div>
 
             <div className="ml-auto flex items-center gap-x-4">
               <ThemeToggle />
