@@ -1,52 +1,52 @@
 /* eslint-disable @next/next/no-img-element */
-import Image from "next/image";
-import Link from "next/link";
-import { ReactNode } from "react";
+import Image from 'next/image';
+import Link from 'next/link';
+import { ReactNode } from 'react';
 
-import Logo from "@/public/logo.png";
-import { DashboardLinks } from "../components/DashboardLinks";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
-import { Menu } from "lucide-react";
-import { ThemeToggle } from "../components/ThemeToggle";
+import Logo from '@/public/logo.png';
+import { DashboardLinks } from '../components/DashboardLinks';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Button } from '@/components/ui/button';
+import { Menu } from 'lucide-react';
+import { ThemeToggle } from '../components/ThemeToggle';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { signOut } from "../lib/auth";
-import { requireUser } from "../lib/hooks";
-import prisma from "../lib/db";
-import { redirect } from "next/navigation";
-import { Toaster } from "@/components/ui/sonner";
+  DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu';
+import { signOut } from '../lib/auth';
+import { requireUser } from '../lib/hooks';
+import prisma from '../lib/db';
+import { redirect } from 'next/navigation';
+import { Toaster } from '@/components/ui/sonner';
 
 async function getData(userId: string) {
   const data = await prisma.user.findUnique({
     where: {
-      id: userId,
+      id: userId
     },
     select: {
       userName: true,
-      grantId: true,
-    },
+      grantId: true
+    }
   });
 
   if (!data?.userName) {
-    return redirect("/onboarding");
+    return redirect('/onboarding');
   }
 
   if (!data?.grantId) {
-    return redirect("/onboarding/grant-id");
+    return redirect('/onboarding/grant-id');
   }
 
   return data;
 }
 
 export default async function DashboardLayout({
-  children,
+  children
 }: {
   children: ReactNode;
 }) {
@@ -56,94 +56,94 @@ export default async function DashboardLayout({
 
   return (
     <>
-      <div className="min-h-screen w-full grid md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
-        <div className="hidden md:block border-r bg-muted/40">
-          <div className="flex h-full max-h-screen flex-col gap-2">
-            <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
-              <Link href="/" className="flex items-center gap-2">
-                <Image src={Logo} alt="Logo" className="size-8" />
-                <p className="text-xl font-bold">
-                  Appoint<span className="text-primary">Ease</span>
+      <div className='min-h-screen w-full grid md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]'>
+        <div className='hidden md:block border-r bg-muted/40'>
+          <div className='flex h-full max-h-screen flex-col gap-2'>
+            <div className='flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6'>
+              <Link href='/' className='flex items-center gap-2'>
+                <Image src={Logo} alt='Logo' className='size-8' />
+                <p className='text-xl font-bold'>
+                  Appoint<span className='text-primary'>Ease</span>
                 </p>
               </Link>
             </div>
 
-            <div className="flex-1">
-              <nav className="grid items-start px-4 lg:px-6">
+            <div className='flex-1'>
+              <nav className='grid items-start px-4 lg:px-6'>
                 <DashboardLinks />
               </nav>
             </div>
           </div>
         </div>
 
-        <div className="flex flex-col">
-          <header className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6 bg-muted/40">
-            <div className="flex items-center gap-2.5">
+        <div className='flex flex-col'>
+          <header className='flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6 bg-muted/40'>
+            <div className='flex items-center gap-2.5'>
               <Sheet>
                 <SheetTrigger asChild>
                   <Button
-                    className="md:hidden shrink-0"
-                    size="icon"
-                    variant="outline"
+                    className='md:hidden shrink-0'
+                    size='icon'
+                    variant='outline'
                   >
-                    <Menu className="size-5" />
+                    <Menu className='size-5' />
                   </Button>
                 </SheetTrigger>
-                <SheetContent side="left" className="flex flex-col">
-                  <Link href="/" className="flex items-center gap-2">
-                    <Image src={Logo} alt="Logo" className="size-8" />
-                    <p className="text-xl font-bold">
-                      Appoint<span className="text-primary">Ease</span>
+                <SheetContent side='left' className='flex flex-col'>
+                  <Link href='/' className='flex items-center gap-2'>
+                    <Image src={Logo} alt='Logo' className='size-8' />
+                    <p className='text-xl font-bold'>
+                      Appoint<span className='text-primary'>Ease</span>
                     </p>
                   </Link>
-                  <nav className="grid gap-2 mt-4">
+                  <nav className='grid gap-2 mt-4'>
                     <DashboardLinks />
                   </nav>
                 </SheetContent>
               </Sheet>
 
-              <Link href="/" className="text-xl font-bold">
+              <Link href='/' className='text-xl font-bold md:hidden'>
                 <p>
-                  Appoint<span className="text-primary">Ease</span>
+                  Appoint<span className='text-primary'>Ease</span>
                 </p>
               </Link>
             </div>
 
-            <div className="ml-auto flex items-center gap-x-4">
+            <div className='ml-auto flex items-center gap-x-4'>
               <ThemeToggle />
 
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button
-                    variant="secondary"
-                    size="icon"
-                    className="rounded-full"
+                    variant='secondary'
+                    size='icon'
+                    className='rounded-full'
                   >
                     <img
                       src={session.user?.image as string}
-                      alt="Profile Image"
+                      alt='Profile Image'
                       width={20}
                       height={20}
-                      className="w-full h-full rounded-full"
+                      className='w-full h-full rounded-full'
                     />
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
+                <DropdownMenuContent align='end'>
                   <DropdownMenuLabel>My Account</DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem asChild>
-                    <Link href="/dashboard/settings">Settings</Link>
+                    <Link href='/dashboard/settings'>Settings</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
                     <DropdownMenuItem asChild>
                       <form
-                        className="w-full"
+                        className='w-full'
                         action={async () => {
-                          "use server";
+                          'use server';
                           await signOut();
                         }}
                       >
-                        <button className="w-full text-left">Log Out</button>
+                        <button className='w-full text-left'>Log Out</button>
                       </form>
                     </DropdownMenuItem>
                   </DropdownMenuItem>
@@ -152,7 +152,7 @@ export default async function DashboardLayout({
             </div>
           </header>
 
-          <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
+          <main className='flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6'>
             {children}
           </main>
         </div>
